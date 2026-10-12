@@ -1,0 +1,8 @@
+cd CollegeEventManagement
+git init
+git remote add origin https://github.com/USERNAME/CollegeEventManagement.git
+git fetch origin
+git branch -a
+git merge origin/main
+git status
+git log --oneline
