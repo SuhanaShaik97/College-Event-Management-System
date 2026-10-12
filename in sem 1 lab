@@ -4,176 +4,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Event Management</title>
+    <title>College Event Portal</title>
 
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            background-color: #f2f5ff;
+            background: #fff0f6;
             color: #333;
         }
 
         header {
-            background-color: #243b80;
+            background: #d63384;
             color: white;
             text-align: center;
             padding: 25px;
         }
 
         nav {
-            background-color: #182858;
-            padding: 12px;
+            background: #ffe0ef;
+            padding: 15px;
             text-align: center;
         }
 
         nav a {
-            color: white;
+            color: #a61e60;
             text-decoration: none;
             margin: 15px;
+            font-weight: bold;
         }
 
-        section {
-            background: white;
-            margin: 20px auto;
+        .welcome {
+            text-align: center;
+            padding: 25px;
+        }
+
+        .events {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
             padding: 20px;
-            max-width: 800px;
-            border-radius: 10px;
         }
 
-        h2 {
-            color: #243b80;
+        .card {
+            background: white;
+            width: 250px;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 10px #e9b8d0;
         }
 
-        .event {
-            background: #eef1ff;
-            padding: 15px;
-            margin: 12px 0;
-            border-radius: 8px;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0 15px;
-            box-sizing: border-box;
+        .card h3 {
+            color: #d63384;
         }
 
         button {
-            background: #243b80;
+            background: #d63384;
             color: white;
-            padding: 12px 20px;
             border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
             cursor: pointer;
-            border-radius: 5px;
         }
 
         button:hover {
-            background: #405bb5;
+            background: #a61e60;
         }
 
         footer {
-            text-align: center;
-            background: #182858;
+            background: #d63384;
             color: white;
+            text-align: center;
             padding: 15px;
+            margin-top: 25px;
         }
     </style>
 </head>
 
 <body>
 
-<header>
-    <h1>College Event Management System</h1>
-    <p>Discover, Participate and Celebrate!</p>
-</header>
+    <header>
+        <h1>College Event Portal</h1>
+        <p>Discover, Participate and Celebrate!</p>
+    </header>
 
-<nav>
-    <a href="#home">Home</a>
-    <a href="#events">Events</a>
-    <a href="#register">Register</a>
-</nav>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#events">Events</a>
+        <a href="#about">About</a>
+    </nav>
 
-<section id="home">
-    <h2>Welcome</h2>
-    <p>
-        Welcome to our College Event Management System.
-        Explore college events and register to participate
-        in exciting activities.
-    </p>
-</section>
+    <section class="welcome" id="home">
+        <h2>Welcome to Our College</h2>
+        <p>Explore exciting events and showcase your talents.</p>
+    </section>
 
-<section id="events">
-    <h2>Upcoming Events</h2>
+    <section class="events" id="events">
 
-    <div class="event">
-        <h3>Technical Symposium</h3>
-        <p>Date: 20 November 2026</p>
-        <p>Venue: College Auditorium</p>
-    </div>
+        <div class="card">
+            <h3>Technical Fest</h3>
+            <p>Date: 20 October 2026</p>
+            <p>Participate in coding and technology competitions.</p>
+            <button onclick="register('Technical Fest')">
+                Register
+            </button>
+        </div>
 
-    <div class="event">
-        <h3>Cultural Fest</h3>
-        <p>Date: 25 November 2026</p>
-        <p>Venue: Main College Ground</p>
-    </div>
+        <div class="card">
+            <h3>Cultural Fest</h3>
+            <p>Date: 25 October 2026</p>
+            <p>Enjoy music, dance and cultural activities.</p>
+            <button onclick="register('Cultural Fest')">
+                Register
+            </button>
+        </div>
 
-    <div class="event">
-        <h3>Sports Meet</h3>
-        <p>Date: 30 November 2026</p>
-        <p>Venue: College Playground</p>
-    </div>
-</section>
+        <div class="card">
+            <h3>Sports Meet</h3>
+            <p>Date: 30 October 2026</p>
+            <p>Show your skills in exciting sports events.</p>
+            <button onclick="register('Sports Meet')">
+                Register
+            </button>
+        </div>
 
-<section id="register">
-    <h2>Event Registration</h2>
+    </section>
 
-    <form onsubmit="registerEvent(event)">
-        <label>Student Name:</label>
-        <input type="text" id="studentName"
-               placeholder="Enter your name" required>
+    <section class="welcome" id="about">
+        <h2>About Us</h2>
+        <p>Our college organizes events to encourage creativity,
+           teamwork and technical skills.</p>
+    </section>
 
-        <label>Student Email:</label>
-        <input type="email" id="studentEmail"
-               placeholder="Enter your email" required>
+    <footer>
+        <p>&copy; 2026 College Event Portal</p>
+    </footer>
 
-        <label>Choose Event:</label>
-        <select id="eventName" required>
-            <option value="">Select an event</option>
-            <option>Technical Symposium</option>
-            <option>Cultural Fest</option>
-            <option>Sports Meet</option>
-        </select>
-
-        <label>Department:</label>
-        <input type="text" id="department"
-               placeholder="Enter your department" required>
-
-        <button type="submit">Register Now</button>
-    </form>
-
-    <p id="message"></p>
-</section>
-
-<footer>
-    <p>&copy; 2026 College Event Management System</p>
-</footer>
-
-<script>
-    function registerEvent(event) {
-        event.preventDefault();
-
-        const name = document.getElementById("studentName").value;
-        const eventName = document.getElementById("eventName").value;
-
-        document.getElementById("message").textContent =
-            "Thank you, " + name +
-            "! Your registration for " + eventName +
-            " has been received.";
-
-        document.querySelector("form").reset();
-    }
-</script>
+    <script>
+        function register(eventName) {
+            alert("You selected " + eventName + "!");
+        }
+    </script>
 
 </body>
 </html>
