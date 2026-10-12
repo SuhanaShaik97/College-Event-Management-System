@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - College Events</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f5ff;
+            margin: 0;
+        }
+        header {
+            background: #243b80;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            max-width: 650px;
+            margin: 25px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+        input, textarea, button {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 11px;
+            margin: 8px 0;
+        }
+        button {
+            background: #243b80;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .event {
+            background: #eef1ff;
+            padding: 12px;
+            margin: 10px 0;
+        }
+        a { color: #243b80; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Panel</h1>
+        <p>Manage College Events</p>
+    </header>
+
+    <main>
+        <h2>Add New Event</h2>
+
+        <form id="eventForm">
+            <input id="name" placeholder="Event Name" required>
+            <input id="date" type="date" required>
+            <input id="venue" placeholder="Event Venue" required>
+            <textarea id="description"
+                placeholder="Event Description" required></textarea>
+            <button type="submit">Add Event</button>
+        </form>
+
+        <h2>Event List</h2>
+        <div id="events"></div>
+        <p><a href="index.html">Home</a> |
+           <a href="user.html">User Page</a></p>
+    </main>
+
+    <script>
+        const form = document.getElementById("eventForm");
+        const eventsDiv = document.getElementById("events");
+
+        let events = JSON.parse(localStorage.getItem("events") || "[]");
+
+        function displayEvents() {
+            eventsDiv.replaceChildren();
+
+            events.forEach((event, index) => {
+                const card = document.createElement("div");
+                card.className = "event";
+
+                const title = document.createElement("h3");
+                title.textContent = event.name;
+
+                const details = document.createElement("p");
+                details.textContent =
+                    event.date + " | " + event.venue;
+
+                const description = document.createElement("p");
+                description.textContent = event.description;
+
+                const remove = document.createElement("button");
+                remove.textContent = "Delete Event";
+                remove.onclick = () => {
+                    events.splice(index, 1);
+                    localStorage.setItem("events",
+                        JSON.stringify(events));
+                    displayEvents();
+                };
+
+                card.append(title, details, description, remove);
+                eventsDiv.appendChild(card);
+            });
+        }
+
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            events.push({
+                name: document.getElementById("name").value,
+                date: document.getElementById("date").value,
+                venue: document.getElementById("venue").value,
+                description:
+                    document.getElementById("description").value
+            });
+
+            localStorage.setItem("events", JSON.stringify(events));
+            form.reset();
+            displayEvents();
+        });
+
+        displayEvents();
+    </script>
+</body>
+</html>

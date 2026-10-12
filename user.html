@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User - College Events</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f5ff;
+            margin: 0;
+        }
+        header {
+            background: #243b80;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        main {
+            max-width: 700px;
+            margin: 25px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+        .event {
+            background: #eef1ff;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 8px;
+        }
+        button {
+            background: #243b80;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        a { color: #243b80; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>College Events</h1>
+        <p>Explore and Register for Events</p>
+    </header>
+
+    <main>
+        <h2>Available Events</h2>
+        <div id="events"></div>
+        <p id="message"></p>
+        <a href="index.html">Home</a> |
+        <a href="admin.html">Admin Page</a>
+    </main>
+
+    <script>
+        const eventsDiv = document.getElementById("events");
+
+        function displayEvents() {
+            const events = JSON.parse(
+                localStorage.getItem("events") || "[]"
+            );
+
+            eventsDiv.replaceChildren();
+
+            if (events.length === 0) {
+                eventsDiv.textContent =
+                    "No events available. Please check again later.";
+                return;
+            }
+
+            events.forEach(event => {
+                const card = document.createElement("div");
+                card.className = "event";
+
+                const title = document.createElement("h3");
+                title.textContent = event.name;
+
+                const details = document.createElement("p");
+                details.textContent =
+                    "Date: " + event.date + " | Venue: " + event.venue;
+
+                const description = document.createElement("p");
+                description.textContent = event.description;
+
+                const button = document.createElement("button");
+                button.textContent = "Register";
+
+                button.onclick = () => {
+                    const name = prompt("Enter your name:");
+                    if (!name || !name.trim()) return;
+
+                    const registrations = JSON.parse(
+                        localStorage.getItem("registrations") || "[]"
+                    );
+
+                    registrations.push({
+                        student: name.trim(),
+                        event: event.name
+                    });
+
+                    localStorage.setItem(
+                        "registrations",
+                        JSON.stringify(registrations)
+                    );
+
+                    document.getElementById("message").textContent =
+                        "Registration received for " + event.name + "!";
+                };
+
+                card.append(title, details, description, button);
+                eventsDiv.appendChild(card);
+            });
+        }
+
+        displayEvents();
+    </script>
+</body>
+</html>
